@@ -1,98 +1,115 @@
 package ru.netology.radio;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RadioTest {
     @Test
-    void currentStationNext() {
+    void StationNext() {
         Radio dance = new Radio();
-        dance.setCurrentStationNext(9);
-        int actual = dance.getCurrentStation();
-
-        assertEquals(0, actual);
-    }
-
-
-    @Test
-    void currentStationPrew() {
-        Radio dance = new Radio();
-        dance.setCurrentStationNext(0);
-        int actual = dance.getCurrentStation();
-
-        assertEquals(1, actual);
-    }
-
-
-    @Test
-    void currentStation() {
-        Radio dance = new Radio();
-        dance.setCurrentStationNext(5);
-        int actual = dance.getCurrentStation();
-
-        assertEquals(6, actual);
-    }
-
-    @Test
-    void currentStationReverse() {
-        Radio dance = new Radio();
-        dance.setCurrentStationPrew(9);
-        int actual = dance.getCurrentStation();
+        dance.setCurrentStationNext(7);
+        dance.setStationNext();
+        int actual = dance.getStation();
 
         assertEquals(8, actual);
     }
 
     @Test
-    void currentStationReversePrew() {
+    void StationNextToTheBeginning() {
         Radio dance = new Radio();
-        dance.setCurrentStationPrew(0);
-        int actual = dance.getCurrentStation();
+        dance.setCurrentStationNext(9);
+        dance.setStationNext();
+        int actual = dance.getStation();
+
+        assertEquals(0, actual);
+    }
+
+    @Test
+    void StationPrew() {
+        Radio dance = new Radio();
+        dance.setCurrentStationNext(7);
+        dance.setStationPrew();
+        int actual = dance.getStation();
+
+        assertEquals(6, actual);
+    }
+
+    @Test
+    void StationPrewToTheEnd() {
+        Radio dance = new Radio();
+        dance.setCurrentStationNext(0);
+        dance.setStationPrew();
+        int actual = dance.getStation();
 
         assertEquals(9, actual);
     }
 
     @Test
-    void currentStationValid() {
+    void CurrentStation() {
         Radio dance = new Radio();
         dance.setCurrentStationValid(5);
-        int actual = dance.getCurrentStation();
+        int actual = dance.getStation();
 
         assertEquals(5, actual);
     }
 
     @Test
-    void increaseVolume() {
-        Radio dance_v = new Radio();
-        dance_v.setIncreaseVolumeUp(11);
-        int actual = dance_v.getIncreaseVolume();
+    void CurrentStationPrew() {
+        Radio dance = new Radio();
+        dance.setCurrentStationValid(-1);
+        int actual = dance.getStation();
+
+        assertEquals(9, actual);
+    }
+
+    @Test
+    void CurrentStationNext() {
+        Radio dance = new Radio();
+        dance.setCurrentStationValid(12);
+        int actual = dance.getStation();
+
+        assertEquals(0, actual);
+    }
+
+    @Test
+    void CurrentVolumeUpBorder() {
+        Radio dance = new Radio();
+        dance.setCurrentVolume(12);
+        dance.setIncreaseVolumeUp();
+        int actual = dance.getIncreaseVolume();
 
         assertEquals(10, actual);
     }
 
     @Test
-    void increaseVolumeNext() {
-        Radio dance_v = new Radio();
-        dance_v.setIncreaseVolumeUp(6);
-        int actual = dance_v.getIncreaseVolume();
+    void CurrentVolumeDownBorder() {
+        Radio dance = new Radio();
+        dance.setCurrentVolume(-1);
+        dance.setIncreaseVolumeDown();
+        int actual = dance.getIncreaseVolume();
 
-        assertEquals(7, actual);
-    }
-
-    @Test
-    void increaseVolumePrew() {
-        Radio dance_v = new Radio();
-        dance_v.setIncreaseVolumeDown(6);
-        int actual = dance_v.getIncreaseVolume();
-
-        assertEquals(5, actual);
-    }
-
-    @Test
-    void increaseVolumePrev() {
-        Radio dance_v = new Radio();
-        dance_v.setIncreaseVolumeDown(-1);
-        int actual = dance_v.getIncreaseVolume();
         assertEquals(0, actual);
+    }
+
+    @Test
+    void CurrentVolumeDown() {
+        Radio dance = new Radio();
+        dance.setCurrentVolume(10);
+        dance.setIncreaseVolumeDown();
+        int actual = dance.getIncreaseVolume();
+
+        assertEquals(9, actual);
+    }
+
+    @Test
+    void CurrentVolumeUp() {
+        Radio dance = new Radio();
+        dance.setCurrentVolume(0);
+        dance.setIncreaseVolumeUp();
+        int actual = dance.getIncreaseVolume();
+
+        assertEquals(1, actual);
     }
 }
